@@ -1,4 +1,4 @@
-name: Build Installer
+name: Build Multilingual Installer
 
 on:
   push:
@@ -28,6 +28,7 @@ jobs:
           
       - name: Build installer
         run: |
+          Write-Host "Building multilingual installer (English + Turkish)..."
           makensis installer.nsi
           
       - name: Verify installer was created
@@ -36,7 +37,8 @@ jobs:
             Write-Error "Installer was not created!"
             exit 1
           }
-          Write-Host "Installer created successfully"
+          Write-Host "✅ Multilingual installer created successfully"
+          Write-Host "Languages: English, Turkish"
           Get-Item "aPath-Installer.exe" | Select-Object Name, Length, LastWriteTime
           
       - name: Upload artifact
