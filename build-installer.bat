@@ -1,7 +1,9 @@
 @echo off
 echo ========================================
-echo aPath Installer Builder
+echo aPath Multilingual Installer Builder
 echo ========================================
+echo.
+echo Building installer with English and Turkish language support...
 echo.
 
 :: Check if aPath.vbs exists
@@ -43,7 +45,8 @@ if %errorLevel% equ 0 (
     echo [SUCCESS] Installer built successfully!
     echo ========================================
     echo.
-    echo The installer is: aPath-Installer.exe
+    echo The multilingual installer is: aPath-Installer.exe
+    echo Languages: English, Turkish
     echo.
 ) else (
     echo.

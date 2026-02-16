@@ -1,5 +1,5 @@
 ; aPath - Copy Path Context Menu Installer
-; NSIS Script for creating single executable installer
+; Multilingual NSIS Script with Language Selection
 
 !define APP_NAME "aPath"
 !define APP_VERSION "1.0.0"
@@ -21,6 +21,12 @@ RequestExecutionLevel admin
 !define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\modern-install.ico"
 !define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\modern-uninstall.ico"
 
+; Language Selection Dialog Settings
+!define MUI_LANGDLL_ALLLANGUAGES
+!define MUI_LANGDLL_REGISTRY_ROOT "HKCU"
+!define MUI_LANGDLL_REGISTRY_KEY "Software\${APP_NAME}"
+!define MUI_LANGDLL_REGISTRY_VALUENAME "Installer Language"
+
 ; Pages
 !insertmacro MUI_PAGE_WELCOME
 !insertmacro MUI_PAGE_LICENSE "LICENSE.txt"
@@ -31,8 +37,28 @@ RequestExecutionLevel admin
 !insertmacro MUI_UNPAGE_INSTFILES
 !insertmacro MUI_UNPAGE_FINISH
 
-; Languages
+; Languages - Must be inserted after pages
 !insertmacro MUI_LANGUAGE "English"
+!insertmacro MUI_LANGUAGE "Turkish"
+
+; Custom Language Strings for Context Menu Text
+LangString CONTEXT_MENU_TEXT ${LANG_ENGLISH} "Copy Path"
+LangString CONTEXT_MENU_TEXT ${LANG_TURKISH} "Yolu Kopyala"
+
+LangString ERROR_VBS_INSTALL ${LANG_ENGLISH} "Failed to install aPath.vbs file!"
+LangString ERROR_VBS_INSTALL ${LANG_TURKISH} "aPath.vbs dosyası kurulamadı!"
+
+LangString ERROR_VBS_COPY ${LANG_ENGLISH} "Installation failed: Could not copy aPath.vbs"
+LangString ERROR_VBS_COPY ${LANG_TURKISH} "Kurulum başarısız: aPath.vbs kopyalanamadı"
+
+; Language selection function
+Function .onInit
+    !insertmacro MUI_LANGDLL_DISPLAY
+FunctionEnd
+
+Function un.onInit
+    !insertmacro MUI_UNGETLANGUAGE
+FunctionEnd
 
 ; Installer Section
 Section "Install" SecInstall
@@ -43,19 +69,19 @@ Section "Install" SecInstall
     
     ; Verify the file was installed
     IfFileExists "$SYSDIR\aPath.vbs" +3 0
-        MessageBox MB_OK|MB_ICONEXCLAMATION "Failed to install aPath.vbs file!"
-        Abort "Installation failed: Could not copy aPath.vbs"
+        MessageBox MB_OK|MB_ICONEXCLAMATION "$(ERROR_VBS_INSTALL)"
+        Abort "$(ERROR_VBS_COPY)"
     
-    ; Apply Registry settings
-    WriteRegStr HKCR "Directory\Background\shell\aPath" "" "Copy Path"
+    ; Apply Registry settings with language-specific context menu text
+    WriteRegStr HKCR "Directory\Background\shell\aPath" "" "$(CONTEXT_MENU_TEXT)"
     WriteRegStr HKCR "Directory\Background\shell\aPath" "Icon" "imageres.dll,-5302"
     WriteRegStr HKCR "Directory\Background\shell\aPath\command" "" 'wscript.exe "$SYSDIR\aPath.vbs" "%V"'
     
-    WriteRegStr HKCR "Directory\shell\aPath" "" "Copy Path"
+    WriteRegStr HKCR "Directory\shell\aPath" "" "$(CONTEXT_MENU_TEXT)"
     WriteRegStr HKCR "Directory\shell\aPath" "Icon" "imageres.dll,-5302"
     WriteRegStr HKCR "Directory\shell\aPath\command" "" 'wscript.exe "$SYSDIR\aPath.vbs" "%1"'
     
-    WriteRegStr HKCR "*\shell\aPath" "" "Copy Path"
+    WriteRegStr HKCR "*\shell\aPath" "" "$(CONTEXT_MENU_TEXT)"
     WriteRegStr HKCR "*\shell\aPath" "Icon" "imageres.dll,-5302"
     WriteRegStr HKCR "*\shell\aPath\command" "" 'wscript.exe "$SYSDIR\aPath.vbs" "%1"'
     
