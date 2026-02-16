@@ -1,0 +1,22 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\aPath]
+@="Yolu Kopyala"
+"Icon"="imageres.dll,-5302"
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\aPath\command]
+@="wscript.exe \"C:\\Windows\\aPath.vbs\" \"%V\""
+
+[HKEY_CLASSES_ROOT\Directory\shell\aPath]
+@="Yolu Kopyala"
+"Icon"="imageres.dll,-5302"
+
+[HKEY_CLASSES_ROOT\Directory\shell\aPath\command]
+@="wscript.exe \"C:\\Windows\\aPath.vbs\" \"%1\""
+
+[HKEY_CLASSES_ROOT\*\shell\aPath]
+@="Yolu Kopyala"
+"Icon"="imageres.dll,-5302"
+
+[HKEY_CLASSES_ROOT\*\shell\aPath\command]
+@="wscript.exe \"C:\\Windows\\aPath.vbs\" \"%1\""
