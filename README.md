@@ -10,11 +10,16 @@ A lightweight context menu extension for Windows 10 that allows you to copy the 
 
 ## 🛠 Installation
 
+### Option 1: Automated Installer (Recommended)
+1.  Go to the **Releases** section on the right side of the repository page.
+2.  Download the latest installer (`.exe`) file.
+3.  Run the installer and follow the simple on-screen instructions.
+
+### Option 2: Manual Installation (Script)
 1.  **Download** or clone this repository.
 2.  Locate `install.bat`.
 3.  **Right-click** on `install.bat` and select **"Run as Administrator"**.
     * *Note: Administrative rights are required to copy the script to the `C:\Windows` directory and update Registry keys.*
-4.  You're done! Right-click any file or folder to see the **"Copy Path"** option.
 
 ## 📂 Project Structure
 * `aPath.vbs`: The background script that handles logic and clipboard interaction.
