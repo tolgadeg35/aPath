@@ -7,6 +7,7 @@ A lightweight context menu extension for Windows 10 that allows you to copy the 
 * **Smart Folder Detection:** Automatically appends a `\` to the end of directory paths for easier terminal navigation.
 * **Universal Support:** Works on files, folders, and inside folder backgrounds.
 * **Custom Icon:** Includes the native Windows "path" icon for a professional look.
+* **Multilingual Support:** Choose between English and Turkish during installation.
 
 ## 🛠 Installation
 
@@ -14,8 +15,9 @@ A lightweight context menu extension for Windows 10 that allows you to copy the 
 
 1.  **Download** the latest `aPath-Installer.exe` from the [Releases](https://github.com/tolgadeg35/aPath/releases) page.
 2.  **Run** the installer (administrative rights will be requested automatically).
-3.  Follow the installation wizard.
-4.  You're done! Right-click any file or folder to see the **"Copy Path"** option.
+3.  **Select your language** - Choose between English or Turkish.
+4.  Follow the installation wizard.
+5.  You're done! Right-click any file or folder to see the **"Copy Path"** or **"Yolu Kopyala"** option (depending on your language selection).
 
 ### Option 2: Manual Installation
 
@@ -27,7 +29,7 @@ A lightweight context menu extension for Windows 10 that allows you to copy the 
 
 ## 📂 Project Structure
 * `aPath.vbs`: The background script that handles logic and clipboard interaction.
-* `installer.nsi`: NSIS script for building the installer executable.
+* `installer.nsi`: Multilingual NSIS script for building the installer executable (English & Turkish).
 * `build-installer.bat`: Script to build the installer locally.
 * `RegistrySetup.reg`: The registry configuration for the context menu entries (for manual installation).
 * `install.bat`: The automated installer (manual installation method).

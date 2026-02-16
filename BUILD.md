@@ -1,8 +1,10 @@
 # Building and Releasing aPath
 
-This document explains how to build the installer and create releases.
+This document explains how to build the multilingual installer and create releases.
 
 ## Building the Installer
+
+The installer is now **multilingual** and supports both **English** and **Turkish**. Users can select their preferred language during installation.
 
 ### Prerequisites
 
@@ -25,7 +27,8 @@ choco install nsis -y
    ```cmd
    build-installer.bat
    ```
-3. The installer will be created as `aPath-Installer.exe`
+3. The multilingual installer will be created as `aPath-Installer.exe`
+4. This single installer includes both English and Turkish languages
 
 ### Building Manually
 
@@ -66,11 +69,14 @@ Before releasing:
 
 1. Build the installer
 2. Run `aPath-Installer.exe` on a test machine
-3. Verify the installation:
-   - Right-click on a file → should see "Copy Path"
-   - Right-click on a folder → should see "Copy Path"
-   - Right-click in empty folder space → should see "Copy Path"
-4. Test the uninstaller:
+3. **Test language selection:**
+   - Language selection dialog should appear first
+   - Try both English and Turkish options
+4. Verify the installation:
+   - Right-click on a file → should see "Copy Path" (English) or "Yolu Kopyala" (Turkish)
+   - Right-click on a folder → context menu should match selected language
+   - Right-click in empty folder space → context menu should match selected language
+5. Test the uninstaller:
    - Go to Settings > Apps > Apps & features
    - Find "aPath" and uninstall
    - Verify context menu entries are removed
@@ -79,11 +85,13 @@ Before releasing:
 
 The NSIS installer:
 - ✅ Requests administrator privileges automatically
+- ✅ **Multilingual support** - English and Turkish with language selection dialog
 - ✅ Copies `aPath.vbs` to Windows directory
 - ✅ Sets up all registry entries for context menu
 - ✅ Creates an uninstaller
 - ✅ Registers in Windows Add/Remove Programs
 - ✅ Provides a clean uninstall experience
+- ✅ Context menu text adapts to selected language ("Copy Path" or "Yolu Kopyala")
 
 ## File Structure
 
@@ -92,8 +100,11 @@ aPath/
 ├── .github/
 │   └── workflows/
 │       └── build-installer.yml    # GitHub Actions workflow
+├── Turkish/                        # Legacy Turkish-only files
+│   ├── installer-tr.nsi           # (Now merged into main installer.nsi)
+│   └── ...
 ├── aPath.vbs                       # Main VBScript
-├── installer.nsi                   # NSIS installer script
+├── installer.nsi                   # Multilingual NSIS installer script (EN + TR)
 ├── build-installer.bat             # Local build script
 ├── LICENSE.txt                     # Required for installer
 ├── install.bat                     # Manual installation (legacy)
