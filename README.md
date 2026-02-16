@@ -51,5 +51,9 @@ The tool uses a hybrid approach to bypass the Windows limitation of showing a co
 ### If you installed manually:
 If you wish to remove the extension, simply right-click `uninstall.bat` and **Run as Administrator**. This will remove the Registry keys and delete the `aPath.vbs` file from your system.
 
+## ❓ Troubleshooting
+
+Having issues with installation or the VBS file? See the [Troubleshooting Guide](TROUBLESHOOTING.md) for detailed solutions.
+
 ---
 *Created by Tolgadeg35 for a cleaner experience.*
