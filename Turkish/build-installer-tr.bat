@@ -4,6 +4,20 @@ echo aPath Yükleyici Derleyici
 echo ========================================
 echo.
 
+:: aPath.vbs dosyasının var olup olmadığını kontrol et
+if not exist "..\aPath.vbs" (
+    echo [HATA] aPath.vbs dosyası bulunamadı!
+    echo.
+    echo Bu betiği Turkish klasöründen çalıştırdığınızdan
+    echo ve üst dizinde aPath.vbs dosyasının olduğundan emin olun.
+    echo.
+    pause
+    exit /b 1
+)
+
+echo [TAMAM] aPath.vbs bulundu
+echo.
+
 :: NSIS'in kurulu olup olmadığını kontrol et
 where makensis >nul 2>&1
 if %errorLevel% neq 0 (

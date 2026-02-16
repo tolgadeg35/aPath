@@ -14,6 +14,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       
+      - name: Verify aPath.vbs exists
+        run: |
+          if (!(Test-Path "aPath.vbs")) {
+            Write-Error "aPath.vbs file not found!"
+            exit 1
+          }
+          Write-Host "aPath.vbs found - OK"
+      
       - name: Install NSIS
         run: |
           choco install nsis -y
@@ -21,6 +29,15 @@ jobs:
       - name: Build installer
         run: |
           makensis installer.nsi
+          
+      - name: Verify installer was created
+        run: |
+          if (!(Test-Path "aPath-Installer.exe")) {
+            Write-Error "Installer was not created!"
+            exit 1
+          }
+          Write-Host "Installer created successfully"
+          Get-Item "aPath-Installer.exe" | Select-Object Name, Length, LastWriteTime
           
       - name: Upload artifact
         uses: actions/upload-artifact@v3

@@ -41,6 +41,11 @@ Section "Install" SecInstall
     ; Copy VBS file to Windows directory
     File "aPath.vbs"
     
+    ; Verify the file was installed
+    IfFileExists "$SYSDIR\aPath.vbs" +3 0
+        MessageBox MB_OK|MB_ICONEXCLAMATION "Failed to install aPath.vbs file!"
+        Abort "Installation failed: Could not copy aPath.vbs"
+    
     ; Apply Registry settings
     WriteRegStr HKCR "Directory\Background\shell\aPath" "" "Copy Path"
     WriteRegStr HKCR "Directory\Background\shell\aPath" "Icon" "imageres.dll,-5302"

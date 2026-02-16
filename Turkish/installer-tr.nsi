@@ -41,6 +41,11 @@ Section "Yükle" SecInstall
     ; VBS dosyasını Windows dizinine kopyala
     File "..\aPath.vbs"
     
+    ; Dosyanın kurulduğunu doğrula
+    IfFileExists "$SYSDIR\aPath.vbs" +3 0
+        MessageBox MB_OK|MB_ICONEXCLAMATION "aPath.vbs dosyası kurulamadı!"
+        Abort "Kurulum başarısız: aPath.vbs kopyalanamadı"
+    
     ; Kayıt Defteri ayarlarını uygula
     WriteRegStr HKCR "Directory\Background\shell\aPath" "" "Yolu Kopyala"
     WriteRegStr HKCR "Directory\Background\shell\aPath" "Icon" "imageres.dll,-5302"

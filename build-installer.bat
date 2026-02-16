@@ -4,6 +4,20 @@ echo aPath Installer Builder
 echo ========================================
 echo.
 
+:: Check if aPath.vbs exists
+if not exist "aPath.vbs" (
+    echo [ERROR] aPath.vbs not found in current directory!
+    echo.
+    echo Make sure you are running this from the project root directory
+    echo where aPath.vbs is located.
+    echo.
+    pause
+    exit /b 1
+)
+
+echo [OK] aPath.vbs found
+echo.
+
 :: Check if NSIS is installed
 where makensis >nul 2>&1
 if %errorLevel% neq 0 (
